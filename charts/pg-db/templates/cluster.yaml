@@ -60,9 +60,11 @@ spec:
   userLabels:
     pgo-version: {{ .Chart.AppVersion }}
   pgPrimary:
-    metadata:
-      annotations:
-        "consul.hashicorp.com/connect-inject": "true"
+    spec:
+      template:
+        metadata:
+          annotations:
+            "consul.hashicorp.com/connect-inject": "true"
     image: {{ include "pg-database.primary-image" . }}
     resources:
       requests:
