@@ -60,6 +60,9 @@ spec:
   userLabels:
     pgo-version: {{ .Chart.AppVersion }}
   pgPrimary:
+    metadata:
+      annotations:
+        "consul.hashicorp.com/connect-inject": "true"
     image: {{ include "pg-database.primary-image" . }}
     resources:
       requests:
@@ -106,6 +109,8 @@ spec:
     {{- end}}
 {{- include "pg-database.backup-storages" . | indent 4 }}
   pgBouncer:
+    annotations:
+      'consul.hashicorp.com/connect-inject': 'true'
     image: {{ include "pg-database.pgbouncer-image" .}}
     size: {{ .Values.pgBouncer.size}}
     resources:
